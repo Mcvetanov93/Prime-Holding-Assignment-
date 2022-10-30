@@ -6,9 +6,11 @@ import common.Type;
  * //TODO - Implement approval implementation for President level
  */
 public class President extends Approver{
+
+    private final int[] prices = new int[]{1000, 2000, 3000, 5000, 8000};
     @Override
     public void approve(int id, double cost, Type type) {
-        if (!canApprove(id, cost, type)) {
+        if (!canApprove(cost, type, prices)) {
             next.approve(id, cost, type);
             return;
         }
@@ -16,28 +18,4 @@ public class President extends Approver{
 
     }
 
-    @Override
-    protected boolean canApprove(int id, double cost, Type type) {
-        boolean result;
-
-        if (type == Type.CONSUMABLES && cost <= 1000) {
-            result = true;
-            return result;
-        } else if (type == Type.CLERICAL && cost <= 2000) {
-            result = true;
-            return result;
-        } else if (type == Type.GADGETS && cost <= 3000) {
-            result = true;
-            return result;
-        } else if (type == Type.GAMING && cost <= 5000) {
-            result = true;
-            return result;
-        } else if (type == Type.PC && cost <= 8000) {
-            result = true;
-            return result;
-        } else {
-            result = false;
-            return result;
-        }
-    }
 }
